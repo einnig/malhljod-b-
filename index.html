@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Málhljóðakassinn - b, bl, br</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            text-align: center; 
+            background-color: #f0f4f8; 
+            margin: 0;
+            padding: 2vh 5vw; 
+            min-height: 95vh; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+        .container { 
+            width: 100%; 
+            max-width: 1300px; 
+            background: white; 
+            padding: 30px 40px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            max-height: 100%;
+            overflow-y: auto;
+        }
+        h1 {
+            color: #1a73e8;
+            font-size: 2em;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        /* Framvindustika */
+        .progress-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            height: 20px;
+        }
+        #progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: #34a853;
+            border-radius: 10px;
+            transition: width 0.5s ease-in-out;
+        }
+        
+        #counter { font-size: 1.2em; color: #666; font-weight: bold; margin-bottom: 10px; }
+
+        #target { 
+            font-size: 4em; 
+            margin: 10px 0; 
+            color: #222; 
+            font-weight: bold;
+        }
+        
+        #is-explanation {
+            font-size: 1.2em;
+            color: #333;
+            background-color: #e8f0fe;
+            padding: 15px 25px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 20px;
+            max-width: 80%;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        .btn { 
+            padding: 12px 25px; 
+            font-size: 1.2em; 
+            margin: 5px; 
+            cursor: pointer; 
+            border: none; 
+            border-radius: 8px; 
+            background-color: #1a73e8; 
+            color: white; 
+            transition: 0.3s; 
+            font-weight: bold;
+        }
+        .btn:hover:not(:disabled) { background-color: #1557b0; transform: scale(1.02); }
+        .recording { background-color: #d93025; animation: pulse 1.5s infinite; }
+        .recording:hover { background-color: #b3140b; }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        #media-box { 
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 12px;
+            background-color: #f8fbff;
+            border: 2px solid #e0e0e0;
+            display: inline-block;
+            min-width: 300px;
+        }
+        
+        .trans-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+        
+        .trans-item {
+            background: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #cce0ff;
+            font-size: 1.15em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        #spoken {
+            margin-top: 15px; 
+            font-size: 1.4em;
+            font-style: italic; 
+            color: #555;
+        }
+        #result {
+            font-weight: bold; 
+            font-size: 1.8em; 
+            margin-top: 5px; 
+            color: #1a73e8;
+        }
+        .nav-btns { margin-top: 30px; }
+        
+        /* Fyrir nafnainnslátt */
+        #studentName {
+            font-size: 1.5em;
+            padding: 10px;
+            margin: 20px 0;
+            width: 80%;
+            max-width: 400px;
+            border: 2px solid #1a73e8;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .feedback-note {
+            margin-top: 40px;
+            font-size: 0.95em;
+            color: #555;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+        }
+        .feedback-note a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .feedback-note a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="app">
+    <h1>Málhljóðakassinn - b, bl, br</h1>
+    
+    <div class="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <div id="counter"></div>
+    
+    <div id="target"></div>
+    <div id="is-explanation"></div>
+    <br>
+    
+    <button id="record-btn" class="btn" onclick="toggleRecord()">🎤 Tala um hljóðnemann</button>
+    
+    <div id="spoken"></div>
+    <div id="result"></div>
+
+    <div id="media-box"></div>
+
+    <div class="nav-btns">
+        <button class="btn" style="background-color: #5f6368;" onclick="prevExercise()">⬅️ Fyrra orð</button>
+        <button class="btn" style="background-color: #5f6368;" onclick="nextExercise()">Næsta orð ➡️</button>
+    </div>
+
+    <div class="feedback-note">
+        Vinsamlegast sendið ábendingar á <a href="mailto:dgu@fb.is">dgu@fb.is</a>
+    </div>
+</div>
+
+<script>
+const exerciseData = [
+    // 1. b-
+    { text: "bað", is_exp: "<b>Útskýring:</b> Staður eða ílát til að þvo sér í.", translations: { "Lettneska": "vanna / pirts" } },
+    { text: "bakari", is_exp: "<b>Útskýring:</b> Manneskja sem hefur að atvinnu að baka brauð og kökur.", translations: { "Lettneska": "maiznieks" } },
+    { text: "banani", is_exp: "<b>Útskýring:</b> Gulur, aflangur ávöxtur sem vex í heitum löndum.", translations: { "Lettneska": "banāns" } },
+    { text: "bál", is_exp: "<b>Útskýring:</b> Stór eldur, oftast kveiktur utandyra.", translations: { "Lettneska": "ugunskurs" } },
+    { text: "bátur", is_exp: "<b>Útskýring:</b> Lítil fleyta eða farartæki til að ferðast á vatni eða sjó.", translations: { "Lettneska": "laiva" } },
+    { text: "ber", is_exp: "<b>Útskýring:</b> Lítill, safaríkur ávöxtur sem vex á runnum eða trjám.", translations: { "Lettneska": "oga" } },
+    { text: "bíll", is_exp: "<b>Útskýring:</b> Vélknúið farartæki á fjórum hjólum.", translations: { "Lettneska": "automašīna" } },
+    { text: "borð", is_exp: "<b>Útskýring:</b> Húsgagn með flatri plötu sem stendur á fótum.", translations: { "Lettneska": "galds" } },
+    { text: "bók", is_exp: "<b>Útskýring:</b> Safn blaðsíðna með texta, prentað og bundið saman.", translations: { "Lettneska": "grāmata" } },
+    { text: "buxur", is_exp: "<b>Útskýring:</b> Fatnaður sem hylur fætur og neðri hluta líkamans.", translations: { "Lettneska": "bikses" } },
+    
+    // 2. bl-
+    { text: "blandari", is_exp: "<b>Útskýring:</b> Heimilistæki til að mauka eða blanda saman mat og drykk.", translations: { "Lettneska": "blenderis" } },
+    { text: "blása", is_exp: "<b>Útskýring:</b> Þegar loft hreyfist (vindur) eða að þeyta lofti úr munni.", translations: { "Lettneska": "pūst" } },
+    { text: "blátt", is_exp: "<b>Útskýring:</b> Liturinn á heiðskírum himni.", translations: { "Lettneska": "zils" } },
+    { text: "bleikur", is_exp: "<b>Útskýring:</b> Ljósrauður litur.", translations: { "Lettneska": "rozā" } },
+    { text: "blettur", is_exp: "<b>Útskýring:</b> Lítill flötur í öðrum lit eða óhreinindi, t.d. á fötum.", translations: { "Lettneska": "traips" } },
+    { text: "blóð", is_exp: "<b>Útskýring:</b> Rauður vökvi sem rennur í æðum manna og dýra.", translations: { "Lettneska": "asinis" } },
+    { text: "blóm", is_exp: "<b>Útskýring:</b> Fallegur og oft ilmandi hluti plöntu.", translations: { "Lettneska": "zieds" } },
+    { text: "blússa", is_exp: "<b>Útskýring:</b> Flík fyrir efri hluta líkamans, oftast kvenmannsflík.", translations: { "Lettneska": "blūze" } },
+    { text: "blýantur", is_exp: "<b>Útskýring:</b> Skriffæri með grafítoddi.", translations: { "Lettneska": "zīmulis" } },
+    { text: "blöð", is_exp: "<b>Útskýring:</b> Grænir hlutar plantna (lauf) eða pappírsarkir (fleirtala af blað).", translations: { "Lettneska": "lapas" } },
+    
+    // 3. br-
+    { text: "brauð", is_exp: "<b>Útskýring:</b> Algengur matur bakaður úr hveiti og vatni.", translations: { "Lettneska": "maize" } },
+    { text: "brekka", is_exp: "<b>Útskýring:</b> Hallandi landslag, upp í móti eða niður í móti.", translations: { "Lettneska": "nogāze" } },
+    { text: "brenna", is_exp: "<b>Útskýring:</b> Að eyðast eða skemmast af eldi.", translations: { "Lettneska": "degt" } },
+    { text: "broddur", is_exp: "<b>Útskýring:</b> Oddhvass endi á einhverju, t.d. stálbroddur eða býflugnabroddur.", translations: { "Lettneska": "dzelonis / smailais gals" } },
+    { text: "brosa", is_exp: "<b>Útskýring:</b> Að sýna gleði með því að lyfta munnvikum.", translations: { "Lettneska": "smaidīt" } },
+    { text: "brú", is_exp: "<b>Útskýring:</b> Mannvirki sem liggur yfir á, veg eða gjá svo hægt sé að fara yfir.", translations: { "Lettneska": "tilts" } },
+    { text: "brúða", is_exp: "<b>Útskýring:</b> Leikfang sem líkist manneskju eða dýri.", translations: { "Lettneska": "lelle" } },
+    { text: "brúnn", is_exp: "<b>Útskýring:</b> Litur eins og á mold eða dökku súkkulaði.", translations: { "Lettneska": "brūns" } },
+    { text: "brúsi", is_exp: "<b>Útskýring:</b> Lítið ílát með loki til að geyma vökva, t.d. kaffi eða vatn.", translations: { "Lettneska": "pudele / termoss" } },
+    { text: "bryggja", is_exp: "<b>Útskýring:</b> Mannvirki við sjó eða vatn þar sem bátar geta lagst að.", translations: { "Lettneska": "piestātne" } }
+];
+
+let userScores = new Array(exerciseData.length).fill(null);
+let userSpoken = new Array(exerciseData.length).fill("");
+
+let currentIndex = 0;
+let recognition;
+let isRecording = false;
+let autoAdvanceTimer = null;
+let hasDownloadedCert = false;
+
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+if (SpeechRecognition) {
+    recognition = new SpeechRecognition();
+    recognition.lang = 'is-IS'; // Breytt yfir á Íslensku
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    
+    recognition.onend = () => {
+        isRecording = false;
+        const btn = document.getElementById('record-btn');
+        if (btn) {
+            btn.innerText = "🎤 Tala um hljóðnemann";
+            btn.classList.remove('recording');
+        }
+        
+        const resDiv = document.getElementById('result');
+        if (resDiv && resDiv.innerText === "Hlusta...") {
+            resDiv.innerText = "";
+        }
+    };
+} else {
+    alert("Þessi vafri styður ekki talgreiningu. Notaðu Chrome eða Edge á tölvu.");
+}
+
+window.onload = () => { 
+    updateUI(); 
+};
+
+function updateProgress() {
+    let correctCount = 0;
+    for (let i = 0; i < userScores.length; i++) {
+        if (userScores[i] === 100) {
+            correctCount++;
+        }
+    }
+    const percent = (correctCount / exerciseData.length) * 100;
+    
+    const progressBar = document.getElementById('progress-bar');
+    if(progressBar) {
+        progressBar.style.width = percent + '%';
+    }
+    return correctCount;
+}
+
+function updateUI() {
+    clearTimeout(autoAdvanceTimer); 
+    const correctCount = updateProgress();
+
+    if (currentIndex >= exerciseData.length) {
+        if (correctCount === exerciseData.length) {
+            document.getElementById('app').innerHTML = `
+                <div class="progress-container"><div id="progress-bar" style="width: 100%;"></div></div>
+                <h1 style="color: #34a853; font-size: 2.5em;">Frábært! Þú náðir 100% árangri! 🎉</h1>
+                <p style="font-size: 1.2em; color: #555;">Skrifaðu nafnið þitt hér að neðan til að sækja viðurkenningarskjalið þitt.</p>
+                <input type="text" id="studentName" placeholder="Skrifaðu nafnið þitt hér" autocomplete="off" ${hasDownloadedCert ? 'disabled' : ''}><br>
+                <button id="cert-btn" class="btn" style="background-color: ${hasDownloadedCert ? '#5f6368' : '#1a73e8'}; font-size: 1.5em; padding: 15px 30px; margin-top: 10px; cursor: ${hasDownloadedCert ? 'not-allowed' : 'pointer'}; opacity: ${hasDownloadedCert ? '0.7' : '1'};" onclick="downloadCert()" ${hasDownloadedCert ? 'disabled' : ''}>
+                    ${hasDownloadedCert ? '✅ Skjal sótt' : '🏆 Sækja viðurkenningarskjal'}
+                </button>
+                <br><br>
+                <button class="btn" style="background-color: #5f6368;" onclick="location.reload()">🔄 Byrja nýja umferð</button>
+                <div class="feedback-note">
+                    Vinsamlegast sendið ábendingar á <a href="mailto:dgu@fb.is">dgu@fb.is</a>
+                </div>
+            `;
+        } else {
+            document.getElementById('app').innerHTML = `
+                <div class="progress-container"><div id="progress-bar" style="width: ${(correctCount/exerciseData.length)*100}%;"></div></div>
+                <h1 style="color: #fbbc05; font-size: 2em;">Þú ert næstum því búin(n)!</h1>
+                <p style="font-size: 1.2em;">Þú hefur klárað ${correctCount} af${exerciseData.length} orðum rétt.</p>
+                <p style="font-size: 1.1em; color: #555;">Farðu til baka og reyndu aftur við þau orð sem vantaði upp á til að fá skjalið.</p>
+                <button class="btn" style="background-color: #fbbc05; color: #000;" onclick="location.reload()">🔄 Reyna aftur</button>
+                <div class="feedback-note">
+                    Vinsamlegast sendið ábendingar á <a href="mailto:dgu@fb.is">dgu@fb.is</a>
+                </div>
+            `;
+        }
+        return;
+    }
+
+    const curr = exerciseData[currentIndex];
+
+    document.getElementById('target').innerHTML = curr.text;
+    document.getElementById('is-explanation').innerHTML = curr.is_exp;
+    document.getElementById('counter').innerText = `Orð ${currentIndex + 1} af${exerciseData.length}`;
+    
+    // Búa til grid fyrir þýðingarnar fyrir neðan
+    let transHTML = '<div class="trans-grid">';
+    for (const [lang, word] of Object.entries(curr.translations)) {
+        transHTML += `
+            <div class="trans-item">
+                <b style="color: #555;">${lang}:</b> 
+                <span style="color: #1a73e8; font-weight: bold; margin-left: 5px;">${word}</span>
+            </div>
+        `;
+    }
+    transHTML += '</div>';
+    document.getElementById('media-box').innerHTML = transHTML;
+
+    const savedScore = userScores[currentIndex];
+    const savedText = userSpoken[currentIndex];
+
+    if (savedScore !== null) {
+        document.getElementById('result').innerText = `Einkunn: ${savedScore}%`;
+        document.getElementById('spoken').innerText = `Þú sagðir: "${savedText}"`;
+    } else {
+        document.getElementById('result').innerText = "";
+        document.getElementById('spoken').innerText = "";
+    }
+}
+
+function nextExercise() {
+    currentIndex++;
+    updateUI();
+}
+
+function prevExercise() {
+    if (currentIndex > 0) {
+        currentIndex--;
+        updateUI();
+    }
+}
+
+function toggleRecord() {
+    if (!recognition) return;
+
+    const btn = document.getElementById('record-btn');
+    if (isRecording) {
+        recognition.stop();
+    } else {
+        try {
+            recognition.start();
+            isRecording = true;
+            btn.innerText = "🛑 Hlusta...";
+            btn.classList.add('recording');
+            document.getElementById('result').innerText = "Hlusta...";
+            document.getElementById('spoken').innerText = "";
+        } catch(e) {
+            console.log("Villa í upptöku: " + e);
+        }
+    }
+}
+
+if (recognition) {
+    recognition.onresult = (event) => {
+        let spoken = event.results[0][0].transcript;
+        spoken = spoken.trim().toLowerCase(); 
+
+        document.getElementById('spoken').innerText = `Þú sagðir: "${spoken}"`;
+        
+        const targetWord = exerciseData[currentIndex].text.toLowerCase();
+        
+        let score = (spoken === targetWord) ? 100 : 0;
+        
+        if (spoken.replace(/[.,/#!$%^&*;:{}=\-_`~()]/g,"").trim() === targetWord) {
+            score = 100;
+        }
+        
+        document.getElementById('result').innerText = `Einkunn: ${score}%`;
+
+        userScores[currentIndex] = score;
+        userSpoken[currentIndex] = spoken;
+        
+        updateProgress();
+
+        if (score === 100) {
+            autoAdvanceTimer = setTimeout(() => {
+                nextExercise();
+            }, 1000); 
+        }
+    };
+}
+
+function downloadCert() {
+    if (hasDownloadedCert) return; 
+
+    const studentNameInput = document.getElementById('studentName');
+    const studentName = studentNameInput ? studentNameInput.value.trim() : "";
+    
+    if (studentName === "") {
+        alert("Vinsamlegast skrifaðu nafnið þitt fyrst!");
+        return;
+    }
+
+    const canvas = document.createElement('canvas');
+    canvas.width = 900;
+    canvas.height = 600;
+    const ctx = canvas.getContext('2d');
+    
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    ctx.strokeStyle = '#1a73e8';
+    ctx.lineWidth = 15;
+    ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
+
+    ctx.strokeStyle = '#fbbc05';
+    ctx.lineWidth = 5;
+    ctx.strokeRect(40, 40, canvas.width - 80, canvas.height - 80);
+    
+    ctx.fillStyle = '#1a73e8';
+    ctx.textAlign = 'center';
+    ctx.font = 'bold 50px Arial';
+    ctx.fillText('Viðurkenningarskjal', canvas.width / 2, 140);
+    
+    ctx.fillStyle = '#333333';
+    ctx.font = '24px Arial';
+    ctx.fillText('Þetta skjal staðfestir að', canvas.width / 2, 220);
+    
+    ctx.fillStyle = '#000000';
+    ctx.font = 'bold 45px Arial';
+    ctx.fillText(studentName, canvas.width / 2, 290);
+    
+    ctx.fillStyle = '#333333';
+    ctx.font = '24px Arial';
+    ctx.fillText('hefur lokið framburðaræfingunni fyrir:', canvas.width / 2, 360);
+
+    ctx.fillStyle = '#1a73e8';
+    ctx.font = 'bold 26px Arial';
+    ctx.fillText('Málhljóðakassinn - b, bl, br', canvas.width / 2, 420);
+    
+    ctx.fillStyle = '#34a853';
+    ctx.font = 'italic 28px Arial';
+    ctx.fillText('Frábær árangur!', canvas.width / 2, 490);
+
+    const dateString = new Date().toLocaleDateString('is-IS');
+    ctx.fillStyle = '#666666';
+    ctx.font = '18px Arial';
+    ctx.fillText('Dagsetning: ' + dateString, canvas.width / 2, 540);
+    
+    const link = document.createElement('a');
+    link.download = `Vidurkenning_Malhljodakassinn_${studentName.replace(/\s+/g, '_')}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    
+    hasDownloadedCert = true;
+    const btn = document.getElementById('cert-btn');
+    if (btn) {
+        btn.disabled = true;
+        btn.innerText = "✅ Skjal sótt";
+        btn.style.backgroundColor = "#5f6368";
+        btn.style.cursor = "not-allowed";
+        btn.style.opacity = "0.7";
+    }
+    if (studentNameInput) {
+        studentNameInput.disabled = true;
+    }
+}
+</script>
+
+</body>
+</html>
