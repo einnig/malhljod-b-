@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Málhljóðakassinn - b, bl, br</title>
+    <title>Stuðningsefni með Lotu 3 í A2.1</title>
     <style>
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
@@ -165,7 +165,7 @@
 <body>
 
 <div class="container" id="app">
-    <h1>Málhljóðakassinn - b, bl, br</h1>
+    <h1>Stuðningsefni með Lotu 3 í A2.1</h1>
     
     <div class="progress-container">
         <div id="progress-bar"></div>
@@ -196,41 +196,39 @@
 
 <script>
 const exerciseData = [
-    // 1. b-
-    { text: "bað", is_exp: "<b>Útskýring:</b> Staður eða ílát til að þvo sér í.", translations: { "Lettneska": "vanna / pirts" } },
-    { text: "bakari", is_exp: "<b>Útskýring:</b> Manneskja sem hefur að atvinnu að baka brauð og kökur.", translations: { "Lettneska": "maiznieks" } },
-    { text: "banani", is_exp: "<b>Útskýring:</b> Gulur, aflangur ávöxtur sem vex í heitum löndum.", translations: { "Lettneska": "banāns" } },
-    { text: "bál", is_exp: "<b>Útskýring:</b> Stór eldur, oftast kveiktur utandyra.", translations: { "Lettneska": "ugunskurs" } },
-    { text: "bátur", is_exp: "<b>Útskýring:</b> Lítil fleyta eða farartæki til að ferðast á vatni eða sjó.", translations: { "Lettneska": "laiva" } },
-    { text: "ber", is_exp: "<b>Útskýring:</b> Lítill, safaríkur ávöxtur sem vex á runnum eða trjám.", translations: { "Lettneska": "oga" } },
-    { text: "bíll", is_exp: "<b>Útskýring:</b> Vélknúið farartæki á fjórum hjólum.", translations: { "Lettneska": "automašīna" } },
-    { text: "borð", is_exp: "<b>Útskýring:</b> Húsgagn með flatri plötu sem stendur á fótum.", translations: { "Lettneska": "galds" } },
-    { text: "bók", is_exp: "<b>Útskýring:</b> Safn blaðsíðna með texta, prentað og bundið saman.", translations: { "Lettneska": "grāmata" } },
-    { text: "buxur", is_exp: "<b>Útskýring:</b> Fatnaður sem hylur fætur og neðri hluta líkamans.", translations: { "Lettneska": "bikses" } },
+    // 1-10: Markorð 121-130
+    { text: "öðrum", is_exp: "<b>Útskýring:</b> Fólk sem er ekki maður sjálfur (þágufall af annar).", translations: { "Lettneska": "citiem", "Filipíska": "sa iba", "Arabíska": "للآخرين", "Víetnamska": "người khác", "Úkraínska": "іншим", "Rússneska": "другим", "Tælenska": "คนอื่น", "Spænska": "otros", "Kúríska": "yên din" } },
+    { text: "segir", is_exp: "<b>Útskýring:</b> Að tala eða tjá sig með orðum (nútíð af að segja).", translations: { "Lettneska": "saka", "Filipíska": "sabi", "Arabíska": "يقول", "Víetnamska": "nói", "Úkraínska": "каже", "Rússneska": "говорит", "Tælenska": "พูด", "Spænska": "dice", "Kúríska": "dibêje" } },
+    { text: "fá", is_exp: "<b>Útskýring:</b> Að eignast eitthvað eða taka við einhverju.", translations: { "Lettneska": "iegūt / dabūt", "Filipíska": "kumuha", "Arabíska": "يحصل على", "Víetnamska": "nhận", "Úkraínska": "отримати", "Rússneska": "получить", "Tælenska": "ได้รับ", "Spænska": "obtener / recibir", "Kúríska": "girtin" } },
+    { text: "stað", is_exp: "<b>Útskýring:</b> Ákveðið svæði eða rými (þolfall af staður).", translations: { "Lettneska": "vieta", "Filipíska": "lugar", "Arabíska": "مكان", "Víetnamska": "địa điểm", "Úkraínska": "місце", "Rússneska": "место", "Tælenska": "สถานที่", "Spænska": "lugar", "Kúríska": "cîh" } },
+    { text: "sjá", is_exp: "<b>Útskýring:</b> Að nota augun til að skoða eitthvað.", translations: { "Lettneska": "redzēt", "Filipíska": "makita", "Arabíska": "يرى", "Víetnamska": "nhìn thấy", "Úkraínska": "бачити", "Rússneska": "видеть", "Tælenska": "เห็น", "Spænska": "ver", "Kúríska": "dîtin" } },
+    { text: "okkar", is_exp: "<b>Útskýring:</b> Eitthvað sem tilheyrir okkur (eignarfall af við).", translations: { "Lettneska": "mūsu", "Filipíska": "namin / atin", "Arabíska": "لنا", "Víetnamska": "của chúng tôi", "Úkraínska": "наш", "Rússneska": "наш", "Tælenska": "ของเรา", "Spænska": "nuestro", "Kúríska": "yê me" } },
+    { text: "orðið", is_exp: "<b>Útskýring:</b> Ákveðin eining í tungumálinu (orð + greinir).", translations: { "Lettneska": "vārds", "Filipíska": "ang salita", "Arabíska": "الكلمة", "Víetnamska": "từ", "Úkraínska": "слово", "Rússneska": "слово", "Tælenska": "คำศัพท์", "Spænska": "la palabra", "Kúríska": "peyv" } },
+    { text: "hennar", is_exp: "<b>Útskýring:</b> Eitthvað sem tilheyrir henni.", translations: { "Lettneska": "viņas", "Filipíska": "kanya", "Arabíska": "لها", "Víetnamska": "của cô ấy", "Úkraínska": "її", "Rússneska": "её", "Tælenska": "ของเธอ", "Spænska": "su / de ella", "Kúríska": "ya wê" } },
+    { text: "fer", is_exp: "<b>Útskýring:</b> Að hreyfa sig á milli staða (nútíð af að fara).", translations: { "Lettneska": "dodas / iet", "Filipíska": "pumunta", "Arabíska": "يذهب", "Víetnamska": "đi", "Úkraínska": "йде", "Rússneska": "идёт", "Tælenska": "ไป", "Spænska": "va", "Kúríska": "diçe" } },
+    { text: "fór", is_exp: "<b>Útskýring:</b> Að hreyfa sig á milli staða (þátíð af að fara).", translations: { "Lettneska": "devās / gāja", "Filipíska": "umalis", "Arabíska": "ذهب", "Víetnamska": "đã đi", "Úkraínska": "пішов", "Rússneska": "ушёл", "Tælenska": "ไปแล้ว", "Spænska": "fue", "Kúríska": "çû" } },
     
-    // 2. bl-
-    { text: "blandari", is_exp: "<b>Útskýring:</b> Heimilistæki til að mauka eða blanda saman mat og drykk.", translations: { "Lettneska": "blenderis" } },
-    { text: "blása", is_exp: "<b>Útskýring:</b> Þegar loft hreyfist (vindur) eða að þeyta lofti úr munni.", translations: { "Lettneska": "pūst" } },
-    { text: "blátt", is_exp: "<b>Útskýring:</b> Liturinn á heiðskírum himni.", translations: { "Lettneska": "zils" } },
-    { text: "bleikur", is_exp: "<b>Útskýring:</b> Ljósrauður litur.", translations: { "Lettneska": "rozā" } },
-    { text: "blettur", is_exp: "<b>Útskýring:</b> Lítill flötur í öðrum lit eða óhreinindi, t.d. á fötum.", translations: { "Lettneska": "traips" } },
-    { text: "blóð", is_exp: "<b>Útskýring:</b> Rauður vökvi sem rennur í æðum manna og dýra.", translations: { "Lettneska": "asinis" } },
-    { text: "blóm", is_exp: "<b>Útskýring:</b> Fallegur og oft ilmandi hluti plöntu.", translations: { "Lettneska": "zieds" } },
-    { text: "blússa", is_exp: "<b>Útskýring:</b> Flík fyrir efri hluta líkamans, oftast kvenmannsflík.", translations: { "Lettneska": "blūze" } },
-    { text: "blýantur", is_exp: "<b>Útskýring:</b> Skriffæri með grafítoddi.", translations: { "Lettneska": "zīmulis" } },
-    { text: "blöð", is_exp: "<b>Útskýring:</b> Grænir hlutar plantna (lauf) eða pappírsarkir (fleirtala af blað).", translations: { "Lettneska": "lapas" } },
-    
-    // 3. br-
-    { text: "brauð", is_exp: "<b>Útskýring:</b> Algengur matur bakaður úr hveiti og vatni.", translations: { "Lettneska": "maize" } },
-    { text: "brekka", is_exp: "<b>Útskýring:</b> Hallandi landslag, upp í móti eða niður í móti.", translations: { "Lettneska": "nogāze" } },
-    { text: "brenna", is_exp: "<b>Útskýring:</b> Að eyðast eða skemmast af eldi.", translations: { "Lettneska": "degt" } },
-    { text: "broddur", is_exp: "<b>Útskýring:</b> Oddhvass endi á einhverju, t.d. stálbroddur eða býflugnabroddur.", translations: { "Lettneska": "dzelonis / smailais gals" } },
-    { text: "brosa", is_exp: "<b>Útskýring:</b> Að sýna gleði með því að lyfta munnvikum.", translations: { "Lettneska": "smaidīt" } },
-    { text: "brú", is_exp: "<b>Útskýring:</b> Mannvirki sem liggur yfir á, veg eða gjá svo hægt sé að fara yfir.", translations: { "Lettneska": "tilts" } },
-    { text: "brúða", is_exp: "<b>Útskýring:</b> Leikfang sem líkist manneskju eða dýri.", translations: { "Lettneska": "lelle" } },
-    { text: "brúnn", is_exp: "<b>Útskýring:</b> Litur eins og á mold eða dökku súkkulaði.", translations: { "Lettneska": "brūns" } },
-    { text: "brúsi", is_exp: "<b>Útskýring:</b> Lítið ílát með loki til að geyma vökva, t.d. kaffi eða vatn.", translations: { "Lettneska": "pudele / termoss" } },
-    { text: "bryggja", is_exp: "<b>Útskýring:</b> Mannvirki við sjó eða vatn þar sem bátar geta lagst að.", translations: { "Lettneska": "piestātne" } }
+    // 11-30: Önnur áhersluorð úr lotu 3
+    { text: "reddast", is_exp: "<b>Útskýring:</b> Þegar vandamál leysist og allt fer vel að lokum.", translations: { "Lettneska": "nokārtosies", "Filipíska": "maayos din", "Arabíska": "سيتم حله", "Víetnamska": "sẽ ổn thôi", "Úkraínska": "все владнається", "Rússneska": "всё образуется", "Tælenska": "จะเรียบร้อย", "Spænska": "se solucionará", "Kúríska": "çareser bibe" } },
+    { text: "hjálpa", is_exp: "<b>Útskýring:</b> Að aðstoða einhvern sem þarf á því að halda.", translations: { "Lettneska": "palīdzēt", "Filipíska": "tumulong", "Arabíska": "يساعد", "Víetnamska": "giúp đỡ", "Úkraínska": "допомагати", "Rússneska": "помогать", "Tælenska": "ช่วยเหลือ", "Spænska": "ayudar", "Kúríska": "alîkarî kirin" } },
+    { text: "reikna", is_exp: "<b>Útskýring:</b> Að nota stærðfræði til að finna út tölu eða svar.", translations: { "Lettneska": "rēķināt", "Filipíska": "magkalkula", "Arabíska": "يحسب", "Víetnamska": "tính toán", "Úkraínska": "рахувати", "Rússneska": "считать", "Tælenska": "คำนวณ", "Spænska": "calcular", "Kúríska": "hesab kirin" } },
+    { text: "reiknivél", is_exp: "<b>Útskýring:</b> Tæki eða forrit sem maður notar til að reikna.", translations: { "Lettneska": "kalkulators", "Filipíska": "kalkuleytor", "Arabíska": "آلة حاسبة", "Víetnamska": "máy tính", "Úkraínska": "калькулятор", "Rússneska": "калькулятор", "Tælenska": "เครื่องคิดเลข", "Spænska": "calculadora", "Kúríska": "makîneya hesabê" } },
+    { text: "leið", is_exp: "<b>Útskýring:</b> Að vera dapur, sorgmæddur eða ekki glaður.", translations: { "Lettneska": "bēdīga", "Filipíska": "malungkot", "Arabíska": "حزين", "Víetnamska": "buồn", "Úkraínska": "сумна", "Rússneska": "грустная", "Tælenska": "เศร้า", "Spænska": "triste", "Kúríska": "xemgîn" } },
+    { text: "vinur", is_exp: "<b>Útskýring:</b> Félagi eða manneskja sem manni þykir vænt um.", translations: { "Lettneska": "draugs", "Filipíska": "kaibigan", "Arabíska": "صديق", "Víetnamska": "bạn bè", "Úkraínska": "друг", "Rússneska": "друг", "Tælenska": "เพื่อน", "Spænska": "amigo", "Kúríska": "heval" } },
+    { text: "leyfir", is_exp: "<b>Útskýring:</b> Að gefa leyfi eða segja að einhver megi gera eitthvað.", translations: { "Lettneska": "atļauj", "Filipíska": "pinapayagan", "Arabíska": "يسمح", "Víetnamska": "cho phép", "Úkraínska": "дозволяє", "Rússneska": "разрешает", "Tælenska": "อนุญาต", "Spænska": "permite", "Kúríska": "destûr dide" } },
+    { text: "rólegt", is_exp: "<b>Útskýring:</b> Að vera afslappaður og ekki stressaður.", translations: { "Lettneska": "mierīgi", "Filipíska": "kalmado", "Arabíska": "هادئ", "Víetnamska": "bình tĩnh", "Úkraínska": "спокійний", "Rússneska": "спокойный", "Tælenska": "สงบ", "Spænska": "tranquilo", "Kúríska": "aram" } },
+    { text: "erfitt", is_exp: "<b>Útskýring:</b> Eitthvað sem er ekki auðvelt að gera eða skilja.", translations: { "Lettneska": "grūti", "Filipíska": "mahirap", "Arabíska": "صعب", "Víetnamska": "khó khăn", "Úkraínska": "складно", "Rússneska": "сложно", "Tælenska": "ยาก", "Spænska": "difícil", "Kúríska": "zehmet" } },
+    { text: "klikkar", is_exp: "<b>Útskýring:</b> Þegar eitthvað fer úrskeiðis eða mistekst.", translations: { "Lettneska": "neizdodas", "Filipíska": "pumalya", "Arabíska": "يفشل", "Víetnamska": "thất bại", "Úkraínska": "йде не так", "Rússneska": "идёт не так", "Tælenska": "ล้มเหลว", "Spænska": "falla", "Kúríska": "têk diçe" } },
+    { text: "vonandi", is_exp: "<b>Útskýring:</b> Að maður voni að eitthvað gerist.", translations: { "Lettneska": "cerams", "Filipíska": "sana", "Arabíska": "نأمل", "Víetnamska": "hy vọng là", "Úkraínska": "сподіваюся", "Rússneska": "надеюсь", "Tælenska": "หวังว่า", "Spænska": "ojalá", "Kúríska": "hêvîdar im" } },
+    { text: "hlutirnir", is_exp: "<b>Útskýring:</b> Mál, atburðir eða hlutir.", translations: { "Lettneska": "lietas", "Filipíska": "mga bagay", "Arabíska": "الأشياء", "Víetnamska": "mọi thứ", "Úkraínska": "речі", "Rússneska": "вещи", "Tælenska": "สิ่งของ", "Spænska": "las cosas", "Kúríska": "tişt" } },
+    { text: "leysast", is_exp: "<b>Útskýring:</b> Þegar lausn eða svar finnst við vandamáli.", translations: { "Lettneska": "atrisināsies", "Filipíska": "mareresolba", "Arabíska": "تُحل", "Víetnamska": "được giải quyết", "Úkraínska": "вирішаться", "Rússneska": "решатся", "Tælenska": "คลี่คลาย", "Spænska": "se resuelven", "Kúríska": "çareser dibin" } },
+    { text: "endanum", is_exp: "<b>Útskýring:</b> Lokin á einhverju, þegar eitthvað klárast.", translations: { "Lettneska": "beigās", "Filipíska": "sa huli", "Arabíska": "في النهاية", "Víetnamska": "cuối cùng", "Úkraínska": "в кінці", "Rússneska": "в конце", "Tælenska": "ในท้ายที่สุด", "Spænska": "al final", "Kúríska": "di dawiyê de" } },
+    { text: "vandamál", is_exp: "<b>Útskýring:</b> Erfitt mál sem þarf að finna lausn á.", translations: { "Lettneska": "problēma", "Filipíska": "problema", "Arabíska": "مشكلة", "Víetnamska": "vấn đề", "Úkraínska": "проблема", "Rússneska": "проблема", "Tælenska": "ปัญหา", "Spænska": "problema", "Kúríska": "pirsgirêk" } },
+    { text: "lagast", is_exp: "<b>Útskýring:</b> Að verða betra eða komast í lag.", translations: { "Lettneska": "uzlabojas", "Filipíska": "naayos", "Arabíska": "يتحسن", "Víetnamska": "tốt hơn", "Úkraínska": "покращується", "Rússneska": "улучшается", "Tælenska": "ดีขึ้น", "Spænska": "mejora", "Kúríska": "çêtir dibe" } },
+    { text: "lausn", is_exp: "<b>Útskýring:</b> Svar við vandamáli eða leið til að laga eitthvað.", translations: { "Lettneska": "risinājums", "Filipíska": "solusyon", "Arabíska": "حل", "Víetnamska": "giải pháp", "Úkraínska": "рішення", "Rússneska": "решение", "Tælenska": "ทางออก", "Spænska": "solución", "Kúríska": "çareserî" } },
+    { text: "blað", is_exp: "<b>Útskýring:</b> Pappír til að skrifa eða teikna á.", translations: { "Lettneska": "lapa", "Filipíska": "papel", "Arabíska": "ورقة", "Víetnamska": "tờ giấy", "Úkraínska": "аркуш", "Rússneska": "бумага", "Tælenska": "กระดาษ", "Spænska": "hoja", "Kúríska": "kaxez" } },
+    { text: "áhyggjur", is_exp: "<b>Útskýring:</b> Órói eða kvíði í huga vegna einhvers.", translations: { "Lettneska": "raizes", "Filipíska": "pag-aalala", "Arabíska": "قلق", "Víetnamska": "lo lắng", "Úkraínska": "хвилювання", "Rússneska": "беспокойство", "Tælenska": "ความกังวล", "Spænska": "preocupaciones", "Kúríska": "xeman" } },
+    { text: "hjálp", is_exp: "<b>Útskýring:</b> Aðstoð sem maður fær eða veitir.", translations: { "Lettneska": "palīdzība", "Filipíska": "tulong", "Arabíska": "مساعدة", "Víetnamska": "sự giúp đỡ", "Úkraínska": "допомога", "Rússneska": "помощь", "Tælenska": "ความช่วยเหลือ", "Spænska": "ayuda", "Kúríska": "alîkarî" } }
 ];
 
 let userScores = new Array(exerciseData.length).fill(null);
@@ -245,7 +243,7 @@ let hasDownloadedCert = false;
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 if (SpeechRecognition) {
     recognition = new SpeechRecognition();
-    recognition.lang = 'is-IS'; // Breytt yfir á Íslensku
+    recognition.lang = 'is-IS';
     recognition.continuous = false;
     recognition.interimResults = false;
     
@@ -327,13 +325,14 @@ function updateUI() {
     document.getElementById('is-explanation').innerHTML = curr.is_exp;
     document.getElementById('counter').innerText = `Orð ${currentIndex + 1} af${exerciseData.length}`;
     
-    // Búa til grid fyrir þýðingarnar fyrir neðan
+    // Búa til grid fyrir þýðingarnar
     let transHTML = '<div class="trans-grid">';
     for (const [lang, word] of Object.entries(curr.translations)) {
+        let dir = (lang === 'Arabíska') ? 'dir="rtl"' : '';
         transHTML += `
             <div class="trans-item">
                 <b style="color: #555;">${lang}:</b> 
-                <span style="color: #1a73e8; font-weight: bold; margin-left: 5px;">${word}</span>
+                <span ${dir} style="color: #1a73e8; font-weight: bold; margin-left: 5px;">${word}</span>
             </div>
         `;
     }
@@ -456,11 +455,11 @@ function downloadCert() {
     
     ctx.fillStyle = '#333333';
     ctx.font = '24px Arial';
-    ctx.fillText('hefur lokið framburðaræfingunni fyrir:', canvas.width / 2, 360);
+    ctx.fillText('hefur lokið munnlegu æfingunni fyrir:', canvas.width / 2, 360);
 
     ctx.fillStyle = '#1a73e8';
     ctx.font = 'bold 26px Arial';
-    ctx.fillText('Málhljóðakassinn - b, bl, br', canvas.width / 2, 420);
+    ctx.fillText('Stuðningsefni með Lotu 3 í A2.1', canvas.width / 2, 420);
     
     ctx.fillStyle = '#34a853';
     ctx.font = 'italic 28px Arial';
@@ -472,7 +471,7 @@ function downloadCert() {
     ctx.fillText('Dagsetning: ' + dateString, canvas.width / 2, 540);
     
     const link = document.createElement('a');
-    link.download = `Vidurkenning_Malhljodakassinn_${studentName.replace(/\s+/g, '_')}.png`;
+    link.download = `Vidurkenning_Lota3_A2.1_${studentName.replace(/\s+/g, '_')}.png`;
     link.href = canvas.toDataURL('image/png');
     link.click();
     
